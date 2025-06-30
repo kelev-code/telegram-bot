@@ -1,0 +1,16 @@
+import telebot
+import os
+
+TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
+
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.send_message(message.chat.id, "Welcome to the Prediction Bot! You'll get daily predictions here.")
+
+def send_prediction(text):
+    bot.send_message(CHANNEL_ID, text)
+
+bot.polling(non_stop=True)
